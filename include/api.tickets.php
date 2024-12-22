@@ -119,8 +119,14 @@ class TicketApiController extends ApiController {
 
 
 
-        if ($ticket)
-            $this->response(201, $ticket->getNumber());
+        if ($ticket){
+             $responseData = [
+                "number" => $ticket->getNumber(),
+                "id" => $ticket->getId()
+            ];
+            header('Content-Type: application/json; charset=utf-8');
+            echo json_encode($responseData);
+        }
         else
             $this->exerr(500, _S("unknown error"));
 
